@@ -56,7 +56,7 @@ fi
 case "$ID" in
     centos|rocky)
         yum update -y
-        yum install -y flex krb5-devel pam-devel perl-IPC-Cmd perl-Time-Piece zlib-devel
+        yum install -y flex krb5-devel pam-devel perl-FindBin perl-IPC-Cmd perl-Time-Piece zlib-devel
         ;;
 
     alpine)
