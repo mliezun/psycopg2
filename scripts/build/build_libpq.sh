@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Build a modern version of libpq and depending libs from source on Centos 5, Alpine or macOS
+# Build a modern version of libpq and depending libs from source on Centos 5, Rocky, Alpine or macOS
 
 set -euo pipefail
 
@@ -54,7 +54,7 @@ fi
 
 # Install packages required to build the libpq.
 case "$ID" in
-    centos)
+    centos|rocky)
         yum update -y
         yum install -y flex krb5-devel pam-devel perl-IPC-Cmd perl-Time-Piece zlib-devel
         ;;
@@ -104,7 +104,7 @@ else
     )
 fi
 
-if [ "$ID" == "centos" ] || [ "$ID" == "macos" ]; then
+if [ "$ID" == "centos" ] || [ "$ID" == "rocky" ] || [ "$ID" == "macos" ]; then
   if [[ ! -f "${LIBPQ_BUILD_PREFIX}/openssl.cnf" ]]; then
 
     # Build openssl if needed
@@ -160,7 +160,7 @@ if [ "$ID" == "macos" ]; then
 fi
 
 
-if [ "$ID" == "centos" ] || [ "$ID" == "macos" ]; then
+if [ "$ID" == "centos" ] || [ "$ID" == "rocky" ] || [ "$ID" == "macos" ]; then
   if [[ ! -f "${LIBPQ_BUILD_PREFIX}/lib/libsasl2.${library_suffix}" ]]; then
 
     # Build libsasl2 if needed
@@ -193,7 +193,7 @@ if [ "$ID" == "centos" ] || [ "$ID" == "macos" ]; then
 fi
 
 
-if [ "$ID" == "centos" ] || [ "$ID" == "macos" ]; then
+if [ "$ID" == "centos" ] || [ "$ID" == "rocky" ] || [ "$ID" == "macos" ]; then
   if [[ ! -f "${LIBPQ_BUILD_PREFIX}/lib/libldap.${library_suffix}" ]]; then
 
     # Build openldap if needed
