@@ -35,7 +35,7 @@ case "$ID" in
         apt-get -y install libpq-dev
         ;;
 
-    centos)
+    centos|rocky|rhel)
         "${dir}/build_libpq.sh" > /dev/null
         ;;
 
