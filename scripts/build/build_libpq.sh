@@ -176,9 +176,11 @@ if [ "$ID" == "centos" ] || [ "$ID" == "rocky" ] || [ "$ID" == "macos" ]; then
 
         pushd "${sasl_dir}"
 
-        # Fix missing time.h include in saslutil.c for newer GCC versions
+        # Fix missing time.h include in multiple files for newer GCC versions
         sed -i.bak '/#include "saslint.h"/a\
 #include <time.h>' lib/saslutil.c
+        sed -i.bak '/#include "plugin_common.h"/a\
+#include <time.h>' plugins/cram.c
 
         autoreconf -i
         ./configure "${make_configure_standard_flags[@]}" --disable-macos-framework
